@@ -7,13 +7,13 @@ This README would normally document whatever steps are necessary to get your app
 * Create database "pace"
 * Run the DDL.sql in the database "pace"
 * Update the dbhost, username and password in conf/app.conf for datasource:
-   [username]:[password]@tcp([dbhost]:3306)/wallet?charset=utf8
+    * [username]:[password]@tcp([dbhost]:3306)/wallet?charset=utf8
 * Install beego:
-   * go get github.com/beego/beego/v2@v2.0.0
+    * go get github.com/beego/beego/v2@v2.0.0
 * Build and run:
-   * go mod vendor
-   * go build main.go
-   * ./main
+    * go mod vendor
+    * go build main.go
+    * ./main
 * For testing including documentation, after running it in localhost, just go to http://localhost:8080/swagger/
 * Notes: use email: superadmin@merchant.com and password: password for creating new merchant.
     * There are three roles available: user, administrator, and superadmin
