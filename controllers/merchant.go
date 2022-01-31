@@ -48,9 +48,9 @@ func (c *MerchantController) Post() {
 		m.EmailAddress = fmt.Sprintf("%s@%s.com", common.RoleAdministrator, v.MerchantCode)
 		hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(common.DefaultMerchantPassword), bcrypt.DefaultCost)
 		m.Password = string(hashedPassword)
-		m.Merchant = &models.Merchant{MerchantCode: v.MerchantCode}
+		m.Merchant = &models.Merchant{Id: v.Id}
 		if _, err := models.AddMember(&m); err != nil {
-			models.DeleteMerchant(v.MerchantCode)
+			models.DeleteMerchant(v.Id)
 			c.Ctx.Output.SetStatus(400)
 			c.Data["json"] = common.CreateErrorMessage(common.ErrorCodeUndefined, err.Error())
 			c.ServeJSON()
@@ -117,7 +117,7 @@ func (c *MerchantController) Put() {
 // @router /:id [delete]
 func (c *MerchantController) Delete() {
 	member, _ := models.GetMemberById(c.MemberId)
-	members, err := models.GetMemberByMerchantId(member.Merchant.MerchantCode)
+	members, err := models.GetMemberByMerchantId(member.Merchant.Id)
 	if err != nil {
 		c.Ctx.Output.SetStatus(400)
 		c.Data["json"] = common.CreateErrorMessage(common.ErrorCodeUndefined, err.Error())
@@ -129,7 +129,7 @@ func (c *MerchantController) Delete() {
 		item.IsDeleted = 1
 		err = models.UpdateMemberById(&item)
 	}
-	if err := models.DeleteMerchant(member.Merchant.MerchantCode); err == nil {
+	if err := models.DeleteMerchant(member.Merchant.Id); err == nil {
 		c.Data["json"] = common.CreateSuccessMessage()
 	} else {
 		c.Ctx.Output.SetStatus(400)

@@ -567,6 +567,9 @@
                     "type": "integer",
                     "format": "int64"
                 },
+                "Id": {
+                    "type": "string"
+                },
                 "IsDeleted": {
                     "type": "integer",
                     "format": "int32"

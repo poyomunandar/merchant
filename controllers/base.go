@@ -65,7 +65,7 @@ func (o *BaseController) CheckAuthorization() {
 		if o.Ctx.Request.Method == "PUT" || o.Ctx.Request.Method == "POST" {
 			if err = json.Unmarshal(o.Ctx.Input.RequestBody, &v); err == nil {
 				if idStr != "" {
-					v.MerchantCode = idStr
+					v.Id = idStr
 				}
 				o.BodyObject = v
 			}
@@ -85,30 +85,30 @@ func (o *BaseController) CheckAuthorization() {
 			v = o.BodyObject.(models.Member)
 		}
 		if idStr != "" {
-			if (v.Merchant != nil && v.Merchant.MerchantCode != member.Merchant.MerchantCode) ||
+			if (v.Merchant != nil && v.Merchant.Id != member.Merchant.Id) ||
 				member.Role == common.RoleUser && idStr != o.MemberId ||
-				(member.Role == common.RoleAdministrator && updatedMember.Merchant.MerchantCode != member.Merchant.MerchantCode) {
+				(member.Role == common.RoleAdministrator && updatedMember.Merchant.Id != member.Merchant.Id) {
 				isAuthorized = false
 			}
 		}
 	case strings.HasPrefix(keyPath, "DELETE/v1/member/"):
 		if member.Role == common.RoleUser ||
-			(member.Role == common.RoleAdministrator && updatedMember.Merchant.MerchantCode != member.Merchant.MerchantCode) {
+			(member.Role == common.RoleAdministrator && updatedMember.Merchant.Id != member.Merchant.Id) {
 			isAuthorized = false
 		}
 	case strings.HasPrefix(keyPath, "POST/v1/member/"):
 		var v = o.BodyObject.(models.Member)
 		if member.Role == common.RoleUser ||
-			(member.Role == common.RoleAdministrator && v.Merchant != nil && v.Merchant.MerchantCode != member.Merchant.MerchantCode) {
+			(member.Role == common.RoleAdministrator && v.Merchant != nil && v.Merchant.Id != member.Merchant.Id) {
 			isAuthorized = false
 		}
 	case strings.HasPrefix(keyPath, "GET/v1/merchant/"):
-		if member.Role != common.RoleSuperAdmin && member.Merchant.MerchantCode != idStr {
+		if member.Role != common.RoleSuperAdmin && member.Merchant.Id != idStr {
 			isAuthorized = false
 		}
 	case strings.HasPrefix(keyPath, "PUT/v1/merchant/"), strings.HasPrefix(keyPath, "DELETE/v1/merchant/"):
 		if member.Role == common.RoleUser ||
-			(member.Role == common.RoleAdministrator && member.Merchant.MerchantCode != idStr) {
+			(member.Role == common.RoleAdministrator && member.Merchant.Id != idStr) {
 			isAuthorized = false
 		}
 	case strings.HasPrefix(keyPath, "POST/v1/merchant/"):

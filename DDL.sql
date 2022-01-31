@@ -8,6 +8,7 @@ CREATE TABLE `authentication` (
 
 CREATE TABLE `merchant` (
                           `id` varchar(255) NOT NULL,
+                          `merchant_code` varchar(255) NOT NULL,
                           `name` varchar(100) DEFAULT NULL,
                           `address` varchar(255) DEFAULT NULL,
                           `is_deleted` tinyint(4) NOT NULL DEFAULT '0',
@@ -18,7 +19,7 @@ CREATE TABLE `merchant` (
                           KEY `merchant_updated_time_index` (`updated_time`)
 );
 
-INSERT INTO merchant (id, name, address, is_deleted, created_time, updated_time) VALUES ('c8b49264-93cb-4b19-bad3-81953cf5317e', 'supermerchant', 'myaddress', 0, 1643391877, 1643391877);
+INSERT INTO merchant (id, merchant_code, name, address, is_deleted, created_time, updated_time) VALUES ('c8b49264-93cb-4b19-bad3-81953cf5317e', 'CODE-1234','supermerchant', 'myaddress', 0, 1643391877, 1643391877);
 
 CREATE TABLE `member` (
                         `id` varchar(255) NOT NULL,

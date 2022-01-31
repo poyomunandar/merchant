@@ -23,8 +23,9 @@ import (
 
 var (
 	Authentication string
-	MerchantCode   string
+	MerchantID     string
 	MemberID       string
+	MerchantCode   string
 	EmailAddress   = "superadmin@merchant.com"
 	Password       = "password"
 	URLMember      = "/v1/member"
@@ -92,6 +93,7 @@ func TestCreateMerchant(t *testing.T) {
 			So(response.MerchantCode, ShouldNotEqual, "")
 		})
 	})
+	MerchantID = response.Id
 	MerchantCode = response.MerchantCode
 }
 
@@ -230,7 +232,7 @@ func TestDeleteMember(t *testing.T) {
 
 // TestGetMerchant is a sample to run an endpoint member
 func TestGetMerchant(t *testing.T) {
-	r, _ := http.NewRequest("GET", fmt.Sprintf("%s/%s", URLMerchant, MerchantCode), nil)
+	r, _ := http.NewRequest("GET", fmt.Sprintf("%s/%s", URLMerchant, MerchantID), nil)
 	r.Header.Add("Authorization", Authentication)
 	w := httptest.NewRecorder()
 	beego.BeeApp.Handlers.ServeHTTP(w, r)
@@ -257,7 +259,7 @@ func TestUpdateMerchant(t *testing.T) {
 		Address: "theiraddress",
 		Name:    "theirname",
 	})
-	r, _ := http.NewRequest("PUT", fmt.Sprintf("%s/%s", URLMerchant, MerchantCode), bytes.NewReader(requestBody))
+	r, _ := http.NewRequest("PUT", fmt.Sprintf("%s/%s", URLMerchant, MerchantID), bytes.NewReader(requestBody))
 	r.Header.Add("Authorization", Authentication)
 	w := httptest.NewRecorder()
 	beego.BeeApp.Handlers.ServeHTTP(w, r)
@@ -280,7 +282,7 @@ func TestUpdateMerchant(t *testing.T) {
 
 // TestGetMerchant is a sample to run an endpoint member
 func TestDeleteMerchant(t *testing.T) {
-	r, _ := http.NewRequest("DELETE", fmt.Sprintf("%s/%s", URLMerchant, MerchantCode), nil)
+	r, _ := http.NewRequest("DELETE", fmt.Sprintf("%s/%s", URLMerchant, MerchantID), nil)
 	r.Header.Add("Authorization", Authentication)
 	w := httptest.NewRecorder()
 	beego.BeeApp.Handlers.ServeHTTP(w, r)

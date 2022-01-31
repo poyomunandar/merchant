@@ -60,7 +60,7 @@ func (c *MemberController) Post() {
 	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(v.Password), bcrypt.DefaultCost)
 	v.Password = string(hashedPassword)
 	if v.Merchant == nil {
-		v.Merchant = &models.Merchant{MerchantCode: member.Merchant.MerchantCode}
+		v.Merchant = &models.Merchant{Id: member.Merchant.Id}
 	}
 	if _, err := models.AddMember(&v); err == nil {
 		c.Ctx.Output.SetStatus(201)
@@ -167,7 +167,7 @@ func (c *MemberController) GetAll() {
 	if member.Role == common.RoleUser {
 		query["id"] = c.MemberId
 	} else if member.Role == common.RoleAdministrator {
-		query["Merchant.MerchantCode"] = member.Merchant.MerchantCode
+		query["Merchant.Id"] = member.Merchant.Id
 	}
 
 	l, err := models.GetAllMember(query, fields, sortby, order, offset, limit)

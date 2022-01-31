@@ -3,6 +3,7 @@ package models
 import (
 	"errors"
 	"fmt"
+	"github.com/google/uuid"
 	"reflect"
 	"strings"
 	"time"
@@ -11,7 +12,8 @@ import (
 )
 
 type Merchant struct {
-	MerchantCode string `orm:"column(id);pk"`
+	Id           string `orm:"column(id);pk"`
+	MerchantCode string `orm:"column(merchant_code)"`
 	Name         string `orm:"column(name);size(100);null"`
 	Address      string `orm:"column(address);size(255);null"`
 	IsDeleted    int8   `orm:"column(is_deleted)"`
@@ -32,15 +34,16 @@ func init() {
 func AddMerchant(m *Merchant) (id int64, err error) {
 	o := orm.NewOrm()
 	m.CreatedTime = time.Now().Unix()
+	m.Id = uuid.New().String()
 	id, err = o.Insert(m)
 	return
 }
 
 // GetMerchantById retrieves Merchant by Id. Returns error if
 // Id doesn't exist
-func GetMerchantById(merchantCode string) (v *Merchant, err error) {
+func GetMerchantById(id string) (v *Merchant, err error) {
 	o := orm.NewOrm()
-	v = &Merchant{MerchantCode: merchantCode}
+	v = &Merchant{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
@@ -130,7 +133,7 @@ func GetAllMerchant(query map[string]string, fields []string, sortby []string, o
 func UpdateMerchantById(m *Merchant) (err error) {
 	o := orm.NewOrm()
 	m.UpdatedTime = time.Now().Unix()
-	v := Merchant{MerchantCode: m.MerchantCode}
+	v := Merchant{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -144,9 +147,9 @@ func UpdateMerchantById(m *Merchant) (err error) {
 
 // DeleteMerchant deletes Merchant by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteMerchant(merchantCode string) (err error) {
+func DeleteMerchant(id string) (err error) {
 	o := orm.NewOrm()
-	v := Merchant{MerchantCode: merchantCode}
+	v := Merchant{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		v.IsDeleted = 1

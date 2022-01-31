@@ -49,7 +49,7 @@ func GetMemberByMerchantId(merchantId string) (v *[]Member, err error) {
 	o := orm.NewOrm()
 	member := Member{}
 	qs := o.QueryTable(member)
-	_, err = qs.Filter("Merchant__MerchantCode", merchantId).Filter("is_deleted", 0).All(v)
+	_, err = qs.Filter("Merchant__Id", merchantId).Filter("is_deleted", 0).All(v)
 	return
 }
 
