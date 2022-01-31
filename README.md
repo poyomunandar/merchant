@@ -24,4 +24,5 @@ This README would normally document whatever steps are necessary to get your app
     * Superadmin can do anything, and only superadmin can create new merchant
     * Once merchant is created, it will automatically create the administrator member for that merchant as well
     * administrator member can create, view, update, delete all members in the same merchant, also can view, update and delete their merchant.
+    * Once a merchant is deleted, all members belong to the merchant will be deleted as well
     * user member can only view and update their self only, and can only view their merchant as well
