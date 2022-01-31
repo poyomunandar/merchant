@@ -15,9 +15,12 @@ CREATE TABLE `merchant` (
                           `created_time` bigint(20) NOT NULL DEFAULT '0',
                           `updated_time` bigint(20) NOT NULL DEFAULT '0',
                           PRIMARY KEY (`id`),
+                          UNIQUE KEY `merchant_merchant_code_uindex` (`merchant_code`),
                           KEY `merchant_created_time_index` (`created_time`),
                           KEY `merchant_updated_time_index` (`updated_time`)
 );
+
+
 
 INSERT INTO merchant (id, merchant_code, name, address, is_deleted, created_time, updated_time) VALUES ('c8b49264-93cb-4b19-bad3-81953cf5317e', 'CODE-1234','supermerchant', 'myaddress', 0, 1643391877, 1643391877);
 

@@ -42,6 +42,7 @@ func (o *BaseController) CheckAuthorization() {
 		o.Ctx.Output.SetStatus(401)
 		o.Data["json"] = common.CreateErrorMessageWithCode(common.ErrorCodeUnauthrized)
 		o.ServeJSON()
+		return
 	}
 	var updatedMember *models.Member
 	if strings.Contains(o.Ctx.Request.URL.Path, "/member") {
