@@ -8,7 +8,7 @@
 package routers
 
 import (
-	"pace_merchant/controllers"
+	"merchant/controllers"
 
 	beego "github.com/beego/beego/v2/server/web"
 )

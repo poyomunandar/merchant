@@ -3,8 +3,8 @@ package controllers
 import (
 	"errors"
 	"golang.org/x/crypto/bcrypt"
-	"pace_merchant/common"
-	"pace_merchant/models"
+	"merchant/common"
+	"merchant/models"
 	"strings"
 )
 

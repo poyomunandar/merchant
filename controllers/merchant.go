@@ -3,8 +3,8 @@ package controllers
 import (
 	"fmt"
 	"golang.org/x/crypto/bcrypt"
-	"pace_merchant/common"
-	"pace_merchant/models"
+	"merchant/common"
+	"merchant/models"
 )
 
 // MerchantController operations for Merchant

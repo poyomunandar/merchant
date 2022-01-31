@@ -2,7 +2,7 @@
 This README would normally document whatever steps are necessary to get your application up and running.
 
 * Install Go 1.16 above
-* Clone the project and set the name as pace_merchant
+* Clone the project and set the name as merchant
 * Install MySQL
 * Create database "pace"
 * Run the DDL.sql in the database "pace"

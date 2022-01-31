@@ -3,8 +3,8 @@ package controllers
 import (
 	"encoding/json"
 	beego "github.com/beego/beego/v2/server/web"
-	"pace_merchant/common"
-	"pace_merchant/models"
+	"merchant/common"
+	"merchant/models"
 	"strings"
 	"time"
 )

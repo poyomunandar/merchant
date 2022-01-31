@@ -7,7 +7,7 @@ import (
 
 func init() {
 
-	beego.GlobalControllerRouter["pace_merchant/controllers:AuthenticationController"] = append(beego.GlobalControllerRouter["pace_merchant/controllers:AuthenticationController"],
+	beego.GlobalControllerRouter["merchant/controllers:AuthenticationController"] = append(beego.GlobalControllerRouter["merchant/controllers:AuthenticationController"],
 		beego.ControllerComments{
 			Method:           "Post",
 			Router:           "/",
@@ -16,7 +16,7 @@ func init() {
 			Filters:          nil,
 			Params:           nil})
 
-	beego.GlobalControllerRouter["pace_merchant/controllers:MemberController"] = append(beego.GlobalControllerRouter["pace_merchant/controllers:MemberController"],
+	beego.GlobalControllerRouter["merchant/controllers:MemberController"] = append(beego.GlobalControllerRouter["merchant/controllers:MemberController"],
 		beego.ControllerComments{
 			Method:           "Post",
 			Router:           "/",
@@ -25,7 +25,7 @@ func init() {
 			Filters:          nil,
 			Params:           nil})
 
-	beego.GlobalControllerRouter["pace_merchant/controllers:MemberController"] = append(beego.GlobalControllerRouter["pace_merchant/controllers:MemberController"],
+	beego.GlobalControllerRouter["merchant/controllers:MemberController"] = append(beego.GlobalControllerRouter["merchant/controllers:MemberController"],
 		beego.ControllerComments{
 			Method:           "GetAll",
 			Router:           "/",
@@ -34,7 +34,7 @@ func init() {
 			Filters:          nil,
 			Params:           nil})
 
-	beego.GlobalControllerRouter["pace_merchant/controllers:MemberController"] = append(beego.GlobalControllerRouter["pace_merchant/controllers:MemberController"],
+	beego.GlobalControllerRouter["merchant/controllers:MemberController"] = append(beego.GlobalControllerRouter["merchant/controllers:MemberController"],
 		beego.ControllerComments{
 			Method:           "GetOne",
 			Router:           "/:id",
@@ -43,7 +43,7 @@ func init() {
 			Filters:          nil,
 			Params:           nil})
 
-	beego.GlobalControllerRouter["pace_merchant/controllers:MemberController"] = append(beego.GlobalControllerRouter["pace_merchant/controllers:MemberController"],
+	beego.GlobalControllerRouter["merchant/controllers:MemberController"] = append(beego.GlobalControllerRouter["merchant/controllers:MemberController"],
 		beego.ControllerComments{
 			Method:           "Put",
 			Router:           "/:id",
@@ -52,7 +52,7 @@ func init() {
 			Filters:          nil,
 			Params:           nil})
 
-	beego.GlobalControllerRouter["pace_merchant/controllers:MemberController"] = append(beego.GlobalControllerRouter["pace_merchant/controllers:MemberController"],
+	beego.GlobalControllerRouter["merchant/controllers:MemberController"] = append(beego.GlobalControllerRouter["merchant/controllers:MemberController"],
 		beego.ControllerComments{
 			Method:           "Delete",
 			Router:           "/:id",
@@ -61,7 +61,7 @@ func init() {
 			Filters:          nil,
 			Params:           nil})
 
-	beego.GlobalControllerRouter["pace_merchant/controllers:MerchantController"] = append(beego.GlobalControllerRouter["pace_merchant/controllers:MerchantController"],
+	beego.GlobalControllerRouter["merchant/controllers:MerchantController"] = append(beego.GlobalControllerRouter["merchant/controllers:MerchantController"],
 		beego.ControllerComments{
 			Method:           "Post",
 			Router:           "/",
@@ -70,7 +70,7 @@ func init() {
 			Filters:          nil,
 			Params:           nil})
 
-	beego.GlobalControllerRouter["pace_merchant/controllers:MerchantController"] = append(beego.GlobalControllerRouter["pace_merchant/controllers:MerchantController"],
+	beego.GlobalControllerRouter["merchant/controllers:MerchantController"] = append(beego.GlobalControllerRouter["merchant/controllers:MerchantController"],
 		beego.ControllerComments{
 			Method:           "GetOne",
 			Router:           "/:id",
@@ -79,7 +79,7 @@ func init() {
 			Filters:          nil,
 			Params:           nil})
 
-	beego.GlobalControllerRouter["pace_merchant/controllers:MerchantController"] = append(beego.GlobalControllerRouter["pace_merchant/controllers:MerchantController"],
+	beego.GlobalControllerRouter["merchant/controllers:MerchantController"] = append(beego.GlobalControllerRouter["merchant/controllers:MerchantController"],
 		beego.ControllerComments{
 			Method:           "Put",
 			Router:           "/:id",
@@ -88,7 +88,7 @@ func init() {
 			Filters:          nil,
 			Params:           nil})
 
-	beego.GlobalControllerRouter["pace_merchant/controllers:MerchantController"] = append(beego.GlobalControllerRouter["pace_merchant/controllers:MerchantController"],
+	beego.GlobalControllerRouter["merchant/controllers:MerchantController"] = append(beego.GlobalControllerRouter["merchant/controllers:MerchantController"],
 		beego.ControllerComments{
 			Method:           "Delete",
 			Router:           "/:id",

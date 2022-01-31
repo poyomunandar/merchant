@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "pace_merchant/routers"
+	_ "merchant/routers"
 
 	"github.com/beego/beego/v2/client/orm"
 	beego "github.com/beego/beego/v2/server/web"
