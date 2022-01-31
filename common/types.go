@@ -60,6 +60,7 @@ type MemberRequest struct {
 }
 
 type MerchantRequest struct {
-	Name    string
-	Address string
+	MerchantCode string
+	Name         string
+	Address      string
 }

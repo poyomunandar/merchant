@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/beego/beego/v2/client/orm"
+	"github.com/google/uuid"
 	"merchant/common"
 	"merchant/models"
 	"net/http"
@@ -68,8 +69,9 @@ func TestAuthentication(t *testing.T) {
 // TestCreateMerchant is a sample to run an endpoint merchant
 func TestCreateMerchant(t *testing.T) {
 	requestBody, _ := json.Marshal(common.MerchantRequest{
-		Address: "myaddress",
-		Name:    "myname",
+		Address:      "myaddress",
+		Name:         "myname",
+		MerchantCode: uuid.New().String(),
 	})
 	r, _ := http.NewRequest("POST", URLMerchant, bytes.NewReader(requestBody))
 	r.Header.Add("Authorization", Authentication)

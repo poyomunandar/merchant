@@ -37,6 +37,12 @@ func (c *MerchantController) URLMapping() {
 func (c *MerchantController) Post() {
 	var v = c.BodyObject.(models.Merchant)
 	var m models.Member
+	if v.MerchantCode == "" {
+		c.Ctx.Output.SetStatus(400)
+		c.Data["json"] = common.CreateErrorMessageWithCode(common.ErrorCodeRequiredParamEmpty, "MerchantCode")
+		c.ServeJSON()
+		return
+	}
 	if _, err := models.AddMerchant(&v); err == nil {
 		m.Role = common.RoleAdministrator
 		m.EmailAddress = fmt.Sprintf("%s@%s.com", common.RoleAdministrator, v.MerchantCode)
