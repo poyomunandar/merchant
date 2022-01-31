@@ -1,0 +1,608 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "beego Test API",
+        "description": "beego has a very cool tools to autogenerate documents for your API",
+        "version": "1.0.0",
+        "termsOfService": "http://beego.me/",
+        "contact": {
+            "email": "astaxie@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/v1",
+    "paths": {
+        "/authentication/": {
+            "post": {
+                "tags": [
+                    "authentication"
+                ],
+                "description": "Authenticate credential to get acess token",
+                "operationId": "AuthenticationController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Authentication content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/common.AuthenticationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Authentication"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/member/": {
+            "get": {
+                "tags": [
+                    "member"
+                ],
+                "description": "get Member, for role user can only see their self, for role administrator can see all members in the same merchant. Superadmin can view any members",
+                "operationId": "MemberController.Get All",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Access Token, for example: 27dd4391dfc6428496e198150c0f6e1e ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 - all columns are in lowercase",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Member"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "member"
+                ],
+                "description": "create Member only for role administrator, and can only create member under administrator's merchant (no need to define merchant in the payload request). Superadmin can create the member under any merchants",
+                "operationId": "MemberController.Post",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Access Token, for example: 27dd4391dfc6428496e198150c0f6e1e ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Member content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/common.MemberRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Member"
+                        }
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    }
+                }
+            }
+        },
+        "/member/{id}": {
+            "get": {
+                "tags": [
+                    "member"
+                ],
+                "description": "get Member by id, for role user can only see their self, for role administrator can see anyone in the same merchant. Superadmin can view any members",
+                "operationId": "MemberController.Get One",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Access Token, for example: 27dd4391dfc6428496e198150c0f6e1e ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Member"
+                        }
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "member"
+                ],
+                "description": "update the Member, for role user, can only update their self, for role administrator can update only the member with the same merchant. Superadmin can update any members",
+                "operationId": "MemberController.Put",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Access Token, for example: 27dd4391dfc6428496e198150c0f6e1e ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Member content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/common.MemberRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/common.ErrorMessage"
+                        }
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "member"
+                ],
+                "description": "delete the Member, only administrator can do this for the member of the same merchant. Superadmin can delete any members",
+                "operationId": "MemberController.Delete",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Access Token, for example: 27dd4391dfc6428496e198150c0f6e1e ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/common.ErrorMessage"
+                        }
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    }
+                }
+            }
+        },
+        "/merchant/": {
+            "post": {
+                "tags": [
+                    "merchant"
+                ],
+                "description": "create Merchant, only member with role superadmin can do this. It will create the merchant along with default administrator member for the new merchant with email administator@[merchantCode].com and default password Merchant!234",
+                "operationId": "MerchantController.Post",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Access Token, for example: 27dd4391dfc6428496e198150c0f6e1e ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Merchant content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/common.MerchantRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Merchant"
+                        }
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    }
+                }
+            }
+        },
+        "/merchant/{id}": {
+            "get": {
+                "tags": [
+                    "merchant"
+                ],
+                "description": "get Merchant by id, can only view the merchant of the member. Superadmin can view any merchants",
+                "operationId": "MerchantController.Get One",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Access Token, for example: 27dd4391dfc6428496e198150c0f6e1e ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Merchant"
+                        }
+                    },
+                    "400": {
+                        "description": "bad request"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "merchant"
+                ],
+                "description": "update the Merchant, only role administrator can do this and only can do to its merchant. Superadmin can update any merchants",
+                "operationId": "MerchantController.Put",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Access Token, for example: 27dd4391dfc6428496e198150c0f6e1e ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Merchant content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/common.MerchantRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/common.ErrorMessage"
+                        }
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "merchant"
+                ],
+                "description": "delete the Merchant, all members belong to the merchant will be deleted as well. It's soft delete. Only administrator can delete their merchant. Superadmin can delete any merchants",
+                "operationId": "MerchantController.Delete",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Access Token, for example: 27dd4391dfc6428496e198150c0f6e1e ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/common.ErrorMessage"
+                        }
+                    },
+                    "400": {
+                        "description": "bad request"
+                    },
+                    "401": {
+                        "description": "unauthorized"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "common.AuthenticationRequest": {
+            "title": "AuthenticationRequest",
+            "type": "object",
+            "properties": {
+                "EmailAddress": {
+                    "type": "string"
+                },
+                "Password": {
+                    "type": "string"
+                }
+            }
+        },
+        "common.ErrorMessage": {
+            "title": "ErrorMessage",
+            "type": "object",
+            "properties": {
+                "error_code": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "common.MemberMerchant": {
+            "title": "MemberMerchant",
+            "type": "object",
+            "properties": {
+                "MerchantCode": {
+                    "type": "string"
+                }
+            }
+        },
+        "common.MemberRequest": {
+            "title": "MemberRequest",
+            "type": "object",
+            "properties": {
+                "Address": {
+                    "type": "string"
+                },
+                "EmailAddress": {
+                    "type": "string"
+                },
+                "Merchant": {
+                    "$ref": "#/definitions/common.MemberMerchant"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Password": {
+                    "type": "string"
+                },
+                "Role": {
+                    "type": "string"
+                }
+            }
+        },
+        "common.MerchantRequest": {
+            "title": "MerchantRequest",
+            "type": "object",
+            "properties": {
+                "Address": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Authentication": {
+            "title": "Authentication",
+            "type": "object",
+            "properties": {
+                "ExpiryTime": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "MemberId": {
+                    "type": "string"
+                },
+                "Token": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Member": {
+            "title": "Member",
+            "type": "object",
+            "properties": {
+                "Address": {
+                    "type": "string"
+                },
+                "CreatedTime": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "EmailAddress": {
+                    "type": "string"
+                },
+                "Id": {
+                    "type": "string"
+                },
+                "IsDeleted": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "Merchant": {
+                    "$ref": "#/definitions/models.Merchant"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Password": {
+                    "type": "string"
+                },
+                "Role": {
+                    "type": "string"
+                },
+                "UpdatedTime": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "models.Merchant": {
+            "title": "Merchant",
+            "type": "object",
+            "properties": {
+                "Address": {
+                    "type": "string"
+                },
+                "CreatedTime": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "IsDeleted": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "MerchantCode": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "UpdatedTime": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "authentication",
+            "description": "AuthenticationController operations for Authentication\n"
+        },
+        {
+            "name": "member",
+            "description": "MemberController operations for Member\n"
+        },
+        {
+            "name": "merchant",
+            "description": "MerchantController operations for Merchant\n"
+        }
+    ]
+}
