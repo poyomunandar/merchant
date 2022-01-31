@@ -7,7 +7,7 @@ This README would normally document whatever steps are necessary to get your app
 * Create database "pace"
 * Run the DDL.sql in the database "pace"
 * Update the dbhost, username and password in conf/app.conf for datasource:
-    * [username]:[password]@tcp([dbhost]:3306)/wallet?charset=utf8
+    * [username]:[password]@tcp([dbhost]:3306)/pace?charset=utf8
 * Install beego:
     * go get github.com/beego/beego/v2@v2.0.0
 * Build and run:
