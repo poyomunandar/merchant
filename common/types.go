@@ -51,7 +51,7 @@ type MemberMerchant struct {
 }
 
 type MemberRequest struct {
-	Merchant     MemberMerchant
+	Merchant     *MemberMerchant
 	EmailAddress string
 	Name         string
 	Address      string

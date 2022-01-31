@@ -44,7 +44,7 @@ func (o *BaseController) CheckAuthorization() {
 		o.ServeJSON()
 	}
 	var updatedMember *models.Member
-	if strings.Contains(o.Ctx.Request.URL.Path, "/member/") {
+	if strings.Contains(o.Ctx.Request.URL.Path, "/member") {
 		var v models.Member
 		if o.Ctx.Request.Method == "PUT" || o.Ctx.Request.Method == "POST" {
 			if err = json.Unmarshal(o.Ctx.Input.RequestBody, &v); err == nil {
@@ -60,7 +60,7 @@ func (o *BaseController) CheckAuthorization() {
 		if err == nil && idStr != "" {
 			updatedMember, err = models.GetMemberById(idStr)
 		}
-	} else if strings.Contains(o.Ctx.Request.URL.Path, "/merchant/") {
+	} else if strings.Contains(o.Ctx.Request.URL.Path, "/merchant") {
 		var v models.Merchant
 		if o.Ctx.Request.Method == "PUT" || o.Ctx.Request.Method == "POST" {
 			if err = json.Unmarshal(o.Ctx.Input.RequestBody, &v); err == nil {
