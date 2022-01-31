@@ -8,31 +8,19 @@
 package routers
 
 import (
-	"merchant/controllers"
-
 	beego "github.com/beego/beego/v2/server/web"
+	"merchant/controllers"
 )
 
 func init() {
-	ns := beego.NewNamespace("/v1",
-
-		beego.NSNamespace("/authentication",
-			beego.NSInclude(
-				&controllers.AuthenticationController{},
-			),
-		),
-
-		beego.NSNamespace("/member",
-			beego.NSInclude(
-				&controllers.MemberController{},
-			),
-		),
-
-		beego.NSNamespace("/merchant",
-			beego.NSInclude(
-				&controllers.MerchantController{},
-			),
-		),
-	)
-	beego.AddNamespace(ns)
+	beego.Router("/v1/authentication", &controllers.AuthenticationController{}, "post:Post")
+	beego.Router("/v1/member", &controllers.MemberController{}, "get:GetAll")
+	beego.Router("/v1/member/:id", &controllers.MemberController{}, "get:GetOne")
+	beego.Router("/v1/member/", &controllers.MemberController{}, "post:Post")
+	beego.Router("/v1/member/:id", &controllers.MemberController{}, "put:Put")
+	beego.Router("/v1/member/:id", &controllers.MemberController{}, "delete:Delete")
+	beego.Router("/v1/merchant/:id", &controllers.MerchantController{}, "get:GetOne")
+	beego.Router("/v1/merchant/", &controllers.MerchantController{}, "post:Post")
+	beego.Router("/v1/merchant/:id", &controllers.MerchantController{}, "put:Put")
+	beego.Router("/v1/merchant/:id", &controllers.MerchantController{}, "delete:Delete")
 }
