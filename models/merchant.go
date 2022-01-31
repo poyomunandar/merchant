@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/beego/beego/v2/client/orm"
-	"github.com/google/uuid"
 )
 
 type Merchant struct {
@@ -32,7 +31,6 @@ func init() {
 // last inserted Id on success.
 func AddMerchant(m *Merchant) (id int64, err error) {
 	o := orm.NewOrm()
-	m.MerchantCode = uuid.New().String()
 	m.CreatedTime = time.Now().Unix()
 	id, err = o.Insert(m)
 	return
