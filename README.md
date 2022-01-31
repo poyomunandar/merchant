@@ -13,5 +13,11 @@ This README would normally document whatever steps are necessary to get your app
 * Build and run:
    * go mod vendor
    * go build main.go
-  ./main
+   * ./main
 * For testing including documentation, after running it in localhost, just go to http://localhost:8080/swagger/
+* Notes: use email: superadmin@merchant.com and password: password for creating new merchant.
+    * There are three roles available: user, administrator, and superadmin
+    * Superadmin can do anything, and only superadmin can create new merchant
+    * Once merchant is created, it will automatically create the administrator member for that merchant as well
+    * administator member can create, view, update, delete all members in the same merchant, also can view, update and delete their merchant.
+    * user member can only view and update their self only, and can only view their merchant as well
